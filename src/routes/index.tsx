@@ -1,29 +1,34 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { CustomCursor } from "@/components/CustomCursor";
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/Hero";
+import { Marquee } from "@/components/Marquee";
+import { HorizontalScroll } from "@/components/HorizontalScroll";
+import { CTA } from "@/components/CTA";
+import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Ferrox — The Edge Layer for Modern APIs" },
+      { name: "description", content: "Ferrox is a high-performance API gateway and edge platform. Route, cache, secure and accelerate every request across 300+ edge locations." },
+      { property: "og:title", content: "Ferrox — The Edge Layer for Modern APIs" },
+      { property: "og:description", content: "A modern API gateway built for teams who ship daily." },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="bg-background text-foreground">
+      <CustomCursor />
+      <Navbar />
+      <Hero />
+      <Marquee />
+      <HorizontalScroll />
+      <CTA />
+      <Footer />
+    </main>
   );
 }
