@@ -1,9 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CustomCursor } from "@/components/CustomCursor";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Marquee } from "@/components/Marquee";
 import { HorizontalScroll } from "@/components/HorizontalScroll";
+import { GlobalNetwork } from "@/components/GlobalNetwork";
+import { Showcase } from "@/components/Showcase";
+import { Testimonials } from "@/components/Testimonials";
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
 
@@ -22,11 +26,15 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <main className="bg-background text-foreground">
+      <SmoothScroll />
       <CustomCursor />
       <Navbar />
       <Hero />
       <Marquee />
       <HorizontalScroll />
+      <GlobalNetwork />
+      <Showcase />
+      <Testimonials />
       <CTA />
       <Footer />
     </main>

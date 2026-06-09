@@ -31,44 +31,47 @@
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-surface: var(--surface);
-  --font-display: "Space Grotesk", sans-serif;
+  --font-display: "Bricolage Grotesque", sans-serif;
   --font-sans: "Inter", sans-serif;
+  --font-serif: "Instrument Serif", serif;
 }
 
 :root {
   --radius: 0.75rem;
-  /* MongoDB-inspired green + clean white */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.18 0.02 160);
-  --ink: oklch(0.16 0.03 160);
-  --ink-soft: oklch(0.45 0.02 160);
-  --surface: oklch(0.985 0.005 160);
+  --background: oklch(0.995 0.005 152);
+  --foreground: oklch(0.16 0.04 160);
+  --ink: oklch(0.14 0.05 160);
+  --ink-soft: oklch(0.42 0.03 160);
+  --surface: oklch(0.975 0.02 152);
+  --surface-deep: oklch(0.18 0.06 160);
 
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.02 160);
+  --card-foreground: oklch(0.16 0.04 160);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.02 160);
+  --popover-foreground: oklch(0.16 0.04 160);
 
-  /* Ferrox green - vivid MongoDB-style */
-  --primary: oklch(0.78 0.21 152);
-  --primary-foreground: oklch(0.16 0.04 160);
+  /* Ferrox green - vivid emerald like MongoDB */
+  --primary: oklch(0.74 0.22 152);
+  --primary-foreground: oklch(0.14 0.05 160);
+  --primary-deep: oklch(0.45 0.18 156);
 
-  --secondary: oklch(0.96 0.01 160);
-  --secondary-foreground: oklch(0.18 0.02 160);
-  --muted: oklch(0.97 0.005 160);
-  --muted-foreground: oklch(0.5 0.02 160);
-  --accent: oklch(0.92 0.12 152);
-  --accent-foreground: oklch(0.16 0.04 160);
+  --secondary: oklch(0.95 0.04 152);
+  --secondary-foreground: oklch(0.16 0.04 160);
+  --muted: oklch(0.96 0.02 152);
+  --muted-foreground: oklch(0.48 0.03 160);
+  --accent: oklch(0.88 0.16 152);
+  --accent-foreground: oklch(0.14 0.05 160);
   --destructive: oklch(0.6 0.22 27);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.92 0.01 160);
-  --input: oklch(0.92 0.01 160);
-  --ring: oklch(0.78 0.21 152);
+  --border: oklch(0.9 0.04 152);
+  --input: oklch(0.9 0.04 152);
+  --ring: oklch(0.74 0.22 152);
 
-  --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 0%, oklch(0.95 0.12 152 / 0.55), transparent 60%);
-  --gradient-green: linear-gradient(135deg, oklch(0.82 0.22 152), oklch(0.7 0.2 158));
-  --shadow-soft: 0 1px 2px oklch(0.18 0.02 160 / 0.04), 0 10px 30px -12px oklch(0.18 0.02 160 / 0.12);
-  --shadow-glow: 0 0 0 1px oklch(0.78 0.21 152 / 0.3), 0 20px 60px -20px oklch(0.78 0.21 152 / 0.5);
+  --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 0%, oklch(0.9 0.18 152 / 0.6), transparent 60%);
+  --gradient-green: linear-gradient(135deg, oklch(0.82 0.22 152), oklch(0.62 0.2 156));
+  --gradient-green-deep: linear-gradient(180deg, oklch(0.4 0.16 156), oklch(0.2 0.08 160));
+  --shadow-soft: 0 1px 2px oklch(0.16 0.04 160 / 0.05), 0 10px 30px -12px oklch(0.16 0.04 160 / 0.12);
+  --shadow-glow: 0 0 0 1px oklch(0.74 0.22 152 / 0.3), 0 20px 60px -20px oklch(0.74 0.22 152 / 0.5);
 }
 
 @layer base {
@@ -80,27 +83,50 @@
 }
 
 /* ---------- Custom Cursor ---------- */
-@utility cursor-dot {
+.cursor-root {
   position: fixed;
   top: 0; left: 0;
-  width: 8px; height: 8px;
-  border-radius: 9999px;
-  background: var(--color-ink);
   pointer-events: none;
   z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width .25s cubic-bezier(.2,.8,.2,1), height .25s cubic-bezier(.2,.8,.2,1), background .2s ease, mix-blend-mode .2s;
+  transform: translate3d(-100px, -100px, 0);
   will-change: transform;
 }
-@utility cursor-dot-active {
-  width: 56px; height: 56px;
-  background: var(--primary);
-  mix-blend-mode: multiply;
+.cursor-dot {
+  position: absolute;
+  top: 0; left: 0;
+  width: 10px; height: 10px;
+  border-radius: 9999px;
+  background: var(--color-ink);
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), background .25s ease, width .35s, height .35s;
 }
-
+.cursor-label {
+  position: absolute;
+  top: 0; left: 0;
+  transform: translate(-50%, -50%) scale(0.6);
+  display: flex; align-items: center; justify-content: center;
+  width: 76px; height: 76px;
+  border-radius: 9999px;
+  background: var(--primary);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity .3s ease, transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.cursor-root[data-state="hover"] .cursor-dot {
+  width: 0; height: 0;
+}
+.cursor-root[data-state="hover"] .cursor-label {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
 @media (max-width: 768px) {
   body { cursor: auto; }
-  .cursor-dot { display: none; }
+  .cursor-root { display: none; }
 }
 
 /* ---------- Marquee / horizontal scroll ---------- */

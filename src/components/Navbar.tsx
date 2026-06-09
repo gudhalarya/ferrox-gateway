@@ -10,14 +10,6 @@ const links = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -25,19 +17,20 @@ export function Navbar() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "backdrop-blur-md bg-background/80 border-b border-border" : "bg-transparent"
-        }`}
-      >
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 h-16 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2 font-display font-bold text-lg tracking-tight">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10 h-20 flex items-center justify-between">
+          <a
+            href="#"
+            data-cursor="Home"
+            className="flex items-center gap-2.5 font-display font-bold text-xl tracking-tight text-ink"
+          >
             <span className="w-7 h-7 rounded-md" style={{ background: "var(--gradient-green)" }} />
             Ferrox
           </a>
 
           <button
-            aria-label="Menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            data-cursor={open ? "Close" : "Open"}
             onClick={() => setOpen((v) => !v)}
             className={`hamburger ${open ? "hamburger-open" : ""}`}
           >
@@ -45,6 +38,7 @@ export function Navbar() {
           </button>
         </div>
       </header>
+
 
       {/* Fullscreen menu */}
       <div
