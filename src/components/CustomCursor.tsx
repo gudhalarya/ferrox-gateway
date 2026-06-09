@@ -1,11 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function CustomCursor() {
-  const ref = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [label, setLabel] = useState("");
 
   useEffect(() => {
-    const dot = ref.current;
-    if (!dot) return;
+    const root = rootRef.current;
+    if (!root) return;
     let x = window.innerWidth / 2;
     let y = window.innerHeight / 2;
     let tx = x, ty = y;
@@ -13,18 +14,24 @@ export function CustomCursor() {
 
     const move = (e: MouseEvent) => { tx = e.clientX; ty = e.clientY; };
     const loop = () => {
-      x += (tx - x) * 0.25;
-      y += (ty - y) * 0.25;
-      dot.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+      x += (tx - x) * 0.22;
+      y += (ty - y) * 0.22;
+      root.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       raf = requestAnimationFrame(loop);
     };
 
     const over = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
-      if (t.closest("a, button, [data-cursor='hover']")) {
-        dot.classList.add("cursor-dot-active");
+      const hit = t.closest("[data-cursor]") as HTMLElement | null;
+      const btn = t.closest("a, button");
+      if (hit?.dataset.cursor) {
+        root.dataset.state = "hover";
+        setLabel(hit.dataset.cursor);
+      } else if (btn) {
+        root.dataset.state = "hover";
+        setLabel("Click");
       } else {
-        dot.classList.remove("cursor-dot-active");
+        root.dataset.state = "idle";
       }
     };
 
@@ -38,5 +45,10 @@ export function CustomCursor() {
     };
   }, []);
 
-  return <div ref={ref} className="cursor-dot" aria-hidden />;
+  return (
+    <div ref={rootRef} className="cursor-root" data-state="idle" aria-hidden>
+      <div className="cursor-dot" />
+      <div className="cursor-label">{label}</div>
+    </div>
+  );
 }
