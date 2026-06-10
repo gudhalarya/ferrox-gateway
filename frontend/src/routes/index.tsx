@@ -4,7 +4,7 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Marquee } from "@/components/Marquee";
-import { HorizontalScroll } from "@/components/HorizontalScroll";
+import { PlatformStacking } from "@/components/PlatformStacking";
 import { GlobalNetwork } from "@/components/GlobalNetwork";
 import { Showcase } from "@/components/Showcase";
 import { Testimonials } from "@/components/Testimonials";
@@ -31,7 +31,7 @@ function Index() {
       <Navbar />
       <Hero />
       <Marquee />
-      <HorizontalScroll />
+      <PlatformStacking />
       <GlobalNetwork />
       <Showcase />
       <Testimonials />

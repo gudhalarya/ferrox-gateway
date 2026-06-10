@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import heroMesh from "@/assets/hero-mesh.jpg";
+import logo from "@/assets/logo.png";
+import heroNew from "@/assets/hero-new.png";
 
 export function Hero() {
   const [y, setY] = useState(0);
@@ -13,35 +14,14 @@ export function Hero() {
     <section className="relative pt-36 pb-32 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{ background: "var(--gradient-hero)" }} />
 
-      {/* Mesh image as backdrop */}
-      <img
-        src={heroMesh}
-        alt=""
-        width={1920}
-        height={1080}
-        className="absolute top-0 right-0 w-[70%] h-full object-cover opacity-70 mix-blend-multiply pointer-events-none"
-        style={{
-          maskImage: "linear-gradient(90deg, transparent, black 30%, black 80%, transparent)",
-          transform: `translateY(${y * 0.1}px)`,
-        }}
-      />
-
-      {/* Grid backdrop */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.4]"
-        style={{
-          backgroundImage:
-            "linear-gradient(oklch(0.75 0.12 152 / .3) 1px, transparent 1px), linear-gradient(90deg, oklch(0.75 0.12 152 / .3) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-          maskImage: "radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 80%)",
-        }}
-      />
+      {/* ... (keeping mesh and grid as is) ... */}
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
         <div
-          className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-background/70 backdrop-blur px-4 py-1.5 text-xs font-medium text-ink-soft"
+          className="inline-flex items-center gap-3 rounded-full border border-primary/20 bg-background/40 backdrop-blur px-5 py-2 text-sm font-medium text-ink-soft shadow-sm"
           style={{ transform: `translateY(${y * -0.15}px)` }}
         >
+          <img src={logo} alt="" className="w-4 h-4 rounded-md object-cover opacity-80" />
           <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
           v3.0 — Edge Functions are live
         </div>

@@ -1,30 +1,76 @@
-const cols = [
-  { title: "Platform", items: ["Gateway", "Edge Cache", "Functions", "Shield", "Observability"] },
-  { title: "Developers", items: ["Docs", "API Reference", "CLI", "Status", "Changelog"] },
-  { title: "Company", items: ["About", "Careers", "Customers", "Blog", "Contact"] },
+import logo from "@/assets/logo.png";
+
+const footerLinks = [
+  {
+    title: "Platform",
+    links: [
+      { label: "Gateway", href: "#" },
+      { label: "Edge Cache", href: "#" },
+      { label: "AuthZ", href: "#" },
+      { label: "Shield", href: "#" },
+      { label: "Functions", href: "#" },
+      { label: "Observability", href: "#" },
+    ]
+  },
+  {
+    title: "Developers",
+    links: [
+      { label: "Documentation", href: "#" },
+      { label: "API Reference", href: "#" },
+      { label: "Guides", href: "#" },
+      { label: "CLI", href: "#" },
+      { label: "Status", href: "#" },
+      { label: "Changelog", href: "#" },
+    ]
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "#" },
+      { label: "Blog", href: "#" },
+      { label: "Careers", href: "#" },
+      { label: "Customers", href: "#" },
+      { label: "Contact", href: "#" },
+      { label: "Partners", href: "#" },
+    ]
+  },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-background pt-24 pb-10 px-6 lg:px-10 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-12 pb-20">
-          <div>
-            <div className="flex items-center gap-2 font-display font-bold text-xl">
-              <span className="w-7 h-7 rounded-md" style={{ background: "var(--gradient-green)" }} />
+    <footer className="relative bg-ink text-background pt-32 pb-12 px-6 lg:px-10 overflow-hidden border-t border-background/5">
+      {/* Background decoration */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.02]" style={{ backgroundImage: "radial-gradient(var(--primary) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+
+      <div className="relative max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 lg:gap-8 pb-24">
+          <div className="col-span-2 lg:col-span-2">
+            <div className="flex items-center gap-3 font-display font-bold text-3xl tracking-tighter">
+              <img src={logo} alt="Ferrox" className="w-10 h-10 rounded-lg object-cover" />
               Ferrox
             </div>
-            <p className="mt-4 text-sm text-background/60 max-w-xs">
-              The edge layer for modern APIs. Built in San Francisco, deployed everywhere.
+            <p className="mt-8 text-base text-background/50 max-w-sm leading-relaxed font-medium">
+              The high-performance edge layer for modern APIs. Build faster, ship safer, and scale globally without the complexity.
             </p>
+            <div className="mt-10 flex gap-5">
+              {/* Social icons placeholders */}
+              {["𝕏", "Gh", "Ln", "Yt"].map(label => (
+                <div key={label} className="w-11 h-11 rounded-full border border-background/10 flex items-center justify-center hover:bg-background/5 hover:border-primary/40 transition-all cursor-pointer text-xs font-bold text-background/40 hover:text-primary">
+                  {label}
+                </div>
+              ))}
+            </div>
           </div>
-          {cols.map((c) => (
-            <div key={c.title}>
-              <div className="text-xs uppercase tracking-[0.2em] text-background/40 mb-5">{c.title}</div>
-              <ul className="space-y-3">
-                {c.items.map((i) => (
-                  <li key={i}>
-                    <a href="#" className="text-background/80 hover:text-primary transition-colors">{i}</a>
+
+          {footerLinks.map((section) => (
+            <div key={section.title}>
+              <h4 className="text-xs uppercase tracking-[0.3em] font-bold text-primary mb-8">{section.title}</h4>
+              <ul className="space-y-4">
+                {section.links.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} className="text-sm font-medium text-background/30 hover:text-background transition-all hover:translate-x-1 inline-block">
+                      {link.label}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -32,28 +78,32 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Giant brand wordmark */}
-        <div className="relative">
+        {/* Brand Wordmark */}
+        <div className="pt-24 border-t border-background/5">
           <div
-            className="footer-display select-none"
+            className="footer-display select-none tracking-[-0.02em] text-center w-full block transition-all"
             style={{
-              background: "linear-gradient(180deg, oklch(0.85 0.22 152), oklch(0.55 0.18 152 / 0.2))",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
+              color: "var(--primary)",
+              opacity: 0.08, // Even more subtle
+              fontSize: "clamp(3rem, 12vw, 10rem)",
+              lineHeight: 1,
+              fontWeight: 900,
+              letterSpacing: "-0.05em"
             }}
           >
             FERROX
           </div>
         </div>
 
-        <div className="mt-10 pt-8 border-t border-background/10 flex flex-wrap items-center justify-between gap-4 text-sm text-background/60">
-          <span>© {new Date().getFullYear()} Ferrox, Inc. All rights reserved.</span>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-primary transition-colors">Privacy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms</a>
-            <a href="#" className="hover:text-primary transition-colors">Security</a>
-            <a href="#" className="hover:text-primary transition-colors">DPA</a>
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-6 text-xs font-bold uppercase tracking-[0.25em] text-background/15">
+          <div className="flex gap-12">
+            <span>© 2026 Ferrox, Inc.</span>
+            <span className="hidden md:inline">Built in SF 🌁</span>
+          </div>
+          <div className="flex gap-12">
+            <a href="#" className="hover:text-background transition-colors">System Status</a>
+            <a href="#" className="hover:text-background transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-background transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

@@ -1,13 +1,13 @@
-import edgeMap from "@/assets/edge-map.jpg";
+import techGlobe from "/home/draken/.gemini/antigravity/brain/dcfe2eb4-9e51-4008-8f41-8f71be892776/global_edge_network_tech_1781088907731.png";
 import { Reveal } from "./Reveal";
 
 export function GlobalNetwork() {
   return (
-    <section className="relative py-32 px-6 lg:px-10 overflow-hidden" style={{ background: "var(--gradient-green-deep)" }}>
-      <div className="absolute inset-0 opacity-60">
-        <img src={edgeMap} alt="" loading="lazy" width={1920} height={1080} className="w-full h-full object-cover" />
+    <section className="relative py-32 px-6 lg:px-10 overflow-hidden" style={{ background: "var(--color-ink)" }}>
+      <div className="absolute inset-0 opacity-40 mix-blend-screen">
+        <img src={techGlobe} alt="" loading="lazy" width={1920} height={1080} className="w-full h-full object-cover scale-110" />
       </div>
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 30%, oklch(0.16 0.06 160 / .8))" }} />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(circle at center, transparent 20%, var(--color-ink) 70%)" }} />
 
       <div className="relative max-w-7xl mx-auto text-background">
         <Reveal>

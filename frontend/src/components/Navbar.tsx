@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import logo from "@/assets/logo.png";
+
 const links = [
   { label: "Platform", href: "#platform" },
   { label: "Solutions", href: "#solutions" },
@@ -22,9 +24,9 @@ export function Navbar() {
           <a
             href="#"
             data-cursor="Home"
-            className="flex items-center gap-2.5 font-display font-bold text-xl tracking-tight text-ink"
+            className="flex items-center gap-3 font-display font-medium text-xl tracking-tighter text-ink opacity-90 hover:opacity-100 transition-opacity"
           >
-            <span className="w-7 h-7 rounded-md" style={{ background: "var(--gradient-green)" }} />
+            <img src={logo} alt="Ferrox" className="w-6 h-6 rounded-md object-cover opacity-80" />
             Ferrox
           </a>
 
@@ -42,9 +44,8 @@ export function Navbar() {
 
       {/* Fullscreen menu */}
       <div
-        className={`fixed inset-0 z-40 transition-all duration-700 ${
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-40 transition-all duration-700 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
       >
         <div
           className="absolute inset-0 bg-background"
