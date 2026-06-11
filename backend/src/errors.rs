@@ -9,5 +9,11 @@ pub enum AppError{
     InvalidCredentials,
 
     #[error("Hashing failed :{0}")]
-    HashingError(#[from]argon2::password_hash::Error)
+    HashingError(#[from]argon2::password_hash::Error),
+
+    #[error("Upstream service not found ")]
+    UpstreamServiceNotFound,
+
+    #[error("No match error found")]
+    NoMatchError,
 }

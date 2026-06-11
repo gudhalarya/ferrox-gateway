@@ -7,7 +7,7 @@ use crate::{errors::AppError, helpers::{hash_password, verify_password}, models:
 #[post("/register")]
 pub async fn register(pool:web::Data<PgPool>,payload:web::Json<UserRegister>)->Result<impl Responder,AppError>{
     let password = hash_password(&payload.password)?;
-    let result= sqlx::query!("INSERT INTO users (name,email,password) VALUES ($1,$2,$3) RETURNING id",payload.name,payload.email,password).fetch_one(&pool.get_ref()).await?;
+    let result= sqlx::query!("INSERT INTO users (name,email,password) VALUES ($1,$2,$3) RETURNING id",payload.name,payload.email,password).fetch_one(pool.get_ref()).await?;
 
     Ok(HttpResponse::Created().json(serde_json::json!({"Message":"User created successfully","id":result.id})))
 }
