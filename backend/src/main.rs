@@ -3,9 +3,12 @@ use std::env;
 use actix_web::{App, HttpServer, middleware::Logger, web};
 use sqlx::postgres::PgPoolOptions;
 use tracing::info;
+use crate::handlers::{login,register};
 
 mod errors;
 mod helpers;
+mod models;
+mod handlers;
 
 #[actix_web::main]
 async fn main ()->std::io::Result<()>{
@@ -28,6 +31,8 @@ async fn main ()->std::io::Result<()>{
         App::new()
         .wrap(Logger::default())
         .app_data(web::Data::new(pool.clone()))
+        .service(login)
+        .service(register)
     })
     .bind(("127.0.0.1",8080))?
     .run()
